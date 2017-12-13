@@ -24,30 +24,30 @@ document.addEventListener('keypress', (event) => {
     
     if(userInput != randomLetter) {
         document.getElementById("letter-guesses").innerHTML = letterGuesses;
-        document.getElementById("guess-count").innerHTML = guessesLeft;
         guessesLeft--;
+        document.getElementById("guess-count").innerHTML = guessesLeft;
         letterGuesses += " " + userInput + ",";
     }   else if(userInput == randomLetter) {
-        document.getElementById("win-count").innerHTML = winCount;
-        document.getElementById("letter-guesses").innerHTML = letterGuesses
-        document.getElementById("guess-count").innerHTML = guessesLeft;
         winCount++;
+        document.getElementById("win-count").innerHTML = winCount;
         guessesLeft = 9;
+        document.getElementById("guess-count").innerHTML = guessesLeft;
         randomIndex();
         randomLetter = txt.charAt(randomIndex());
         letterGuesses = "";
+        document.getElementById("letter-guesses").innerHTML = letterGuesses
         console.log("updated from correct " + randomLetter);
     }
 
     if(guessesLeft === 0) {
-        document.getElementById("loss-count").innerHTML = lossCount;
-        document.getElementById("letter-guesses").innerHTML = letterGuesses;
-        document.getElementById("guess-count").innerHTML = guessesLeft;
         lossCount++;
+        document.getElementById("loss-count").innerHTML = lossCount;
         guessesLeft = 9;
+        document.getElementById("guess-count").innerHTML = guessesLeft;
         randomIndex();
         randomLetter = txt.charAt(randomIndex());
         letterGuesses = "";
+        document.getElementById("letter-guesses").innerHTML = letterGuesses
         console.log("updated num: " + randomLetter);
     }
 
@@ -60,4 +60,5 @@ document.addEventListener('keypress', (event) => {
 
 
 // need to loop through letter guesses string to compare if a 
+
 
