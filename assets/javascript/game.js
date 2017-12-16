@@ -10,12 +10,6 @@ console.log(randomLetter);
 
 document.addEventListener('keypress', (event) => {
     userInput = event.key;
-    // Need to add inputs to the end of the array
-    // var inputArray = []; 
-    // inputArray.push(userInput);
-    // Array methods to search for like values
-    // userInputArray.push(userInput);
-
     if(userInputArray.indexOf(userInput) != -1) {
         console.log("The indexOf found a duplicate");
     }
