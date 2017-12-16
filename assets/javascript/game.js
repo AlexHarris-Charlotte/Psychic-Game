@@ -2,63 +2,90 @@ var winCount = 0;
 var lossCount = 0;
 var guessesLeft = 9;
 var letterGuesses = "";
-
-
-
-// Make a string from A to Z. Then get a random letter from the string 
-// and store the letter to a variable for logical comparison
+var userInputArray = [];
 var txt = "abcdefghijklmnopqrstuvwxyz";
+randomLetter = txt.charAt(randomIndex());
+console.log(randomLetter);
+
+
+document.addEventListener('keypress', (event) => {
+    userInput = event.key;
+    // Need to add inputs to the end of the array
+    // var inputArray = []; 
+    // inputArray.push(userInput);
+    // Array methods to search for like values
+    // userInputArray.push(userInput);
+
+    if(userInputArray.indexOf(userInput) != -1) {
+        console.log("The indexOf found a duplicate");
+    }
+    if(userInput != randomLetter) {
+        incorrectInput();
+    }   else if(userInput == randomLetter) {
+        correctOutcome();
+    }
+    if(guessesLeft === 0) {
+        lossOutcome();
+    }
+    console.log(userInputArray);
+})
+
+
+
+// functions 
+
 // Gets a random letter based on the index of the string.
 function randomIndex() {
     var randomLetterIndex = Math.floor(Math.random() * 26);
     return randomLetterIndex;
 }
 
-randomLetter = txt.charAt(randomIndex());
-
-console.log(randomLetter);
-
-
-document.addEventListener('keypress', (event) => {
-    const userInput = event.key;
-    
-    if(userInput != randomLetter) {
-        document.getElementById("letter-guesses").innerHTML = letterGuesses;
+// Will test if the userInput is a duplicate in the array
+// If not a duplicat it will process the guess and add it to the array
+function incorrectInput() {
+    if(userInputArray.indexOf(userInput) == -1) {
+        userInputArray.push(userInput); 
         guessesLeft--;
-        document.getElementById("guess-count").innerHTML = guessesLeft;
         letterGuesses += " " + userInput + ",";
-    }   else if(userInput == randomLetter) {
-        winCount++;
-        document.getElementById("win-count").innerHTML = winCount;
-        guessesLeft = 9;
-        document.getElementById("guess-count").innerHTML = guessesLeft;
-        randomIndex();
-        randomLetter = txt.charAt(randomIndex());
-        letterGuesses = "";
-        document.getElementById("letter-guesses").innerHTML = letterGuesses
-        console.log("updated from correct " + randomLetter);
+        document.getElementById("letter-guesses").innerHTML = letterGuesses;  
     }
+    document.getElementById("guess-count").innerHTML = guessesLeft;
+    // console.log(inputArray);
+}
 
-    if(guessesLeft === 0) {
-        lossCount++;
-        document.getElementById("loss-count").innerHTML = lossCount;
-        guessesLeft = 9;
-        document.getElementById("guess-count").innerHTML = guessesLeft;
-        randomIndex();
-        randomLetter = txt.charAt(randomIndex());
-        letterGuesses = "";
-        document.getElementById("letter-guesses").innerHTML = letterGuesses
-        console.log("updated num: " + randomLetter);
-    }
+// Occurs when the user guesses the correct letter
+function correctOutcome() {
+    winCount++;
+    guessesLeft = 9;
+    letterGuesses = "";
+    document.getElementById("win-count").innerHTML = winCount;
+    document.getElementById("guess-count").innerHTML = guessesLeft;
+    randomIndex();
+    randomLetter = txt.charAt(randomIndex());
+    document.getElementById("letter-guesses").innerHTML = letterGuesses
+    clearArray();
+    console.log("updated from correct " + randomLetter);
+}
 
-})
+// Occurs whent he user exceeds the number of guesses
+function lossOutcome() {
+    lossCount++;
+    guessesLeft = 9;     
+    letterGuesses = "";        
+    document.getElementById("loss-count").innerHTML = lossCount;
+    document.getElementById("guess-count").innerHTML = guessesLeft;
+    randomIndex();
+    randomLetter = txt.charAt(randomIndex());
+    document.getElementById("letter-guesses").innerHTML = letterGuesses
+    clearArray();
+    console.log("updated num: " + randomLetter);
+}
+
+// Removes array items when the user either records a win or a loss. 
+function clearArray() {
+    userInputArray = [];
+}
 
 
-
-
-
-
-
-// need to loop through letter guesses string to compare if a 
 
 
